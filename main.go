@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func checkErr(e error) {
@@ -35,14 +36,11 @@ func main() {
 
 	var result []int
 	fileText := string(file)
-	for _, letter := range fileText {
-		if string(letter) != " " {
-			if number, err := strconv.Atoi(string(letter)); err == nil {
-				result = append(result, number)
-			} else {
-				fmt.Println("The file contains a foreign character:", string(letter))
-			}
+	numbers := strings.Split(fileText, " ")
 
+	for _, number := range numbers {
+		if number, err := strconv.Atoi(number); err == nil {
+			result = append(result, number)
 		}
 	}
 
